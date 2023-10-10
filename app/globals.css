@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+  }
+}
+
+@layer base {
+  h1 {
+    @apply font-bold text-2xl my-3;
+  }
+}
+
+.tr-class {
+  @apply flex flex-col mb-3 md:table-row;
+}
+
+.td-class {
+  @apply md:px-4 sm:py-3 first:rounded-t-lg last:rounded-b-lg sm:first:rounded-t-none sm:last:rounded-b-none sm:first:rounded-tl-lg sm:first:rounded-bl-lg sm:last:rounded-tr-lg sm:last:rounded-br-lg;
+}
