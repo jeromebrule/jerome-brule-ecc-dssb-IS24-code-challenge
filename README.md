@@ -50,14 +50,6 @@ http://localhost:3000/api/register
 }
 ```
 
-OR
-
-you can use curl command inside govt-app container
-
-```
-curl http://localhost:3000/api/register -d '{"name": "Test User", "email":"test@test.com", "password": "password123"}'
-```
-
 ### Swagger
 
 <sup>There's a weird error in the package.</sup>
