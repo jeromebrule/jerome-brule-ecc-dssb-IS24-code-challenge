@@ -28,7 +28,7 @@ docker compose up
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Register new admin user from postman.
+### Register new admin user with postman.
 
 <sup>Once the app is running</sup>
 
