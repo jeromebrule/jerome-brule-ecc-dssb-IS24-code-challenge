@@ -40,9 +40,9 @@ http://localhost:3000/api/register
     "email": "lisa@test.com",
     "password": "password123"
 }
+```
 
-&&
-
+```
 {
     "name": "Alan",
     "email": "alan@test.com",
