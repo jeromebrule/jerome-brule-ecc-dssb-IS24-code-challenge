@@ -60,10 +60,11 @@ curl http://localhost:3000/api/register -d '{"name": "Test User", "email":"test@
 
 ### Swagger
 
+<sup>There's a weird error in the package.</sup>
+
 ```
 http://localhost:3000/api-doc
 
-There's a weird error in the package.
 ```
 
 ### Endpoint
