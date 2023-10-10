@@ -30,7 +30,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Register new admin user with postman.
 
-<sup>Once the app is running and use those user to login and test the users stories.</sup>
+Once the app is running and use those user to login and test the users stories.
 Open [http://localhost:3000/api/auth/signin](http://localhost:3000/api/auth/signin) with your browser to see the result.
 
 ```
