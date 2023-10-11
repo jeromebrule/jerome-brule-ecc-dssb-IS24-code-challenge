@@ -54,7 +54,6 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [employees, setEmployees] = useState<any>([]);
   const [status, setStatus] = useState<any>();
-  const [productOwner, setProductOwner] = useState<any>();
 
   const {
     reset,
@@ -96,9 +95,9 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
         label: employee.name,
         key: employee.id,
       }));
-
+      const date = Date.parse(productInfo.startDate);
+      setStartDate(date);
       setSelectedOptions(loadDev);
-      setProductOwner(productInfo.productOwnerName);
     }
   }, [employees]);
 
