@@ -1,8 +1,10 @@
 import {notFound} from "next/navigation";
 import Product from "@/lib/types";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import ProductForm from "@/app/components/ProductForm";
-// import {isLisa, isAlan} from "@/helpers/session";
-// import {useSession} from "next-auth/react";
+import {isLisa, isAlan} from "@/helpers/session";
+import {getServerSession} from "next-auth/next";
+
 interface Props {
   params: {
     id: number;
@@ -10,7 +12,7 @@ interface Props {
 }
 
 const Edit = async ({params: {id}}: Props) => {
-  // const {data: session} = useSession();
+  const session = await getServerSession(authOptions);
   const res = await fetch(`http://localhost:3000/api/products/${id}`);
   const productInfo: Product = await res.json();
 
@@ -26,29 +28,29 @@ const Edit = async ({params: {id}}: Props) => {
     location: true,
   };
 
-  // if (isLisa(session)) {
-  //   activeFields = {
-  //     productName: true,
-  //     productOwnerName: true,
-  //     developers: true,
-  //     scrumMasterName: true,
-  //     startDate: true,
-  //     methodology: true,
-  //     location: true,
-  //   };
-  // }
+  if (isLisa(session)) {
+    activeFields = {
+      productName: true,
+      productOwnerName: true,
+      developers: true,
+      scrumMasterName: true,
+      startDate: true,
+      methodology: true,
+      location: false,
+    };
+  }
 
-  // if (isAlan(session)) {
-  //   activeFields = {
-  //     productName: true,
-  //     productOwnerName: true,
-  //     developers: true,
-  //     scrumMasterName: true,
-  //     startDate: false,
-  //     methodology: true,
-  //     location: true,
-  //   };
-  // }
+  if (isAlan(session)) {
+    activeFields = {
+      productName: true,
+      productOwnerName: true,
+      developers: true,
+      scrumMasterName: true,
+      startDate: false,
+      methodology: true,
+      location: true,
+    };
+  }
 
   return (
     <>

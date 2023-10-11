@@ -4,10 +4,8 @@ import {FieldValues, useForm, Controller} from "react-hook-form";
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import {z} from "zod";
-import {zodResolver} from "@hookform/resolvers/zod";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {format, parseISO} from "date-fns";
 
 const Developer = z.object({
   id: z.number().optional(),
@@ -76,6 +74,40 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
       value: "AGILE",
     },
   ];
+
+  // let activeFields = {
+  //   productName: true,
+  //   productOwnerName: true,
+  //   developers: true,
+  //   scrumMasterName: true,
+  //   startDate: true,
+  //   methodology: true,
+  //   location: true,
+  // };
+
+  // if (isLisa(session)) {
+  //   activeFields = {
+  //     productName: true,
+  //     productOwnerName: true,
+  //     developers: true,
+  //     scrumMasterName: true,
+  //     startDate: true,
+  //     methodology: true,
+  //     location: false,
+  //   };
+  // }
+
+  // if (isAlan(session)) {
+  //   activeFields = {
+  //     productName: true,
+  //     productOwnerName: true,
+  //     developers: true,
+  //     scrumMasterName: true,
+  //     startDate: false,
+  //     methodology: true,
+  //     location: true,
+  //   };
+  // }
 
   useEffect(() => {
     const defaultDev = employees
@@ -306,7 +338,9 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
         {activeFields.location && (
           <div className="form-control w-full max-w-xs">
             <label htmlFor="location" className="label">
-              <span className="label-text">Location</span>
+              <span className="label-text">
+                Location - {activeFields.location}
+              </span>
               <span className="label-text-alt"></span>
             </label>
             <input
