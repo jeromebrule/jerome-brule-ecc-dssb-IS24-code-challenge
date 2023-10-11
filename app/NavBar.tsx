@@ -11,7 +11,7 @@ const NavBar = () => {
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost normal-case text-xl">
-          A Very Real Company
+          Challenge
         </Link>
       </div>
       <div className="flex-none">

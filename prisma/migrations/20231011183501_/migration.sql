@@ -53,16 +53,17 @@ CREATE TABLE `VerificationToken` (
 
 -- CreateTable
 CREATE TABLE `Product` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `productId` INTEGER NOT NULL AUTO_INCREMENT,
+    `productNumber` VARCHAR(191) NOT NULL,
     `productName` VARCHAR(191) NOT NULL,
     `productOwnerName` VARCHAR(191) NOT NULL,
     `scrumMasterName` VARCHAR(191) NOT NULL,
     `startDate` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `methodology` ENUM('WATERFALL', 'AGILE') NOT NULL,
-    `location` VARCHAR(191) NOT NULL,
+    `methodology` ENUM('WATERFALL', 'AGILE') NOT NULL DEFAULT 'AGILE',
+    `location` VARCHAR(191) NOT NULL DEFAULT '',
 
     UNIQUE INDEX `Product_productName_key`(`productName`),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`productId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -93,4 +94,4 @@ ALTER TABLE `Session` ADD CONSTRAINT `Session_userId_fkey` FOREIGN KEY (`userId`
 ALTER TABLE `_EmployeeToProduct` ADD CONSTRAINT `_EmployeeToProduct_A_fkey` FOREIGN KEY (`A`) REFERENCES `Employee`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `_EmployeeToProduct` ADD CONSTRAINT `_EmployeeToProduct_B_fkey` FOREIGN KEY (`B`) REFERENCES `Product`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `_EmployeeToProduct` ADD CONSTRAINT `_EmployeeToProduct_B_fkey` FOREIGN KEY (`B`) REFERENCES `Product`(`productId`) ON DELETE CASCADE ON UPDATE CASCADE;

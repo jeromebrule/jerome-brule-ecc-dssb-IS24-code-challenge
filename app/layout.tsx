@@ -7,8 +7,8 @@ import AuthProvider from "./auth/Provider";
 const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
-  title: "A Very Real Company",
-  description: "A Very Real Company",
+  title: "jerome-brule-ecc-dssb-IS24-code-challenge",
+  description: "jerome-brule-ecc-dssb-IS24-code-challenge",
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {

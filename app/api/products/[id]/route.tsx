@@ -184,6 +184,7 @@ export async function PUT(
   {params}: {params: {id: string}}
 ) {
   const body = await request.json();
+  body.startDate = new Date(body.startDate);
   const validation = schema.safeParse(body);
 
   const secret = process.env.NEXTAUTH_SECRET;
@@ -191,6 +192,7 @@ export async function PUT(
 
   // if (!token)
   //   return NextResponse.json({error: "Not authentificated"}, {status: 401});
+  console.log(body);
 
   if (!validation.success)
     return NextResponse.json(validation.error.errors, {status: 400});

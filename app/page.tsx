@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <main>
-      <h1>Welcome to A Very Real Company</h1>
+      <h1>jerome-brule-ecc-dssb-IS24-code-challenge</h1>
       {session && <h3> {session.user!.name}</h3>}
     </main>
   );

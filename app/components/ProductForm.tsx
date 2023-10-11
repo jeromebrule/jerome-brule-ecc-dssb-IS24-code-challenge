@@ -19,7 +19,7 @@ const schema = z.object({
   productOwnerName: z.string().min(3),
   developers: z.array(Developer).optional(),
   scrumMasterName: z.string().min(3),
-  startDate: z.string().optional(),
+  startDate: z.string().transform((str) => new Date(str)),
   methodology: z.string().optional(),
   location: z.string().optional(),
 });
@@ -119,8 +119,8 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
       body: JSON.stringify(data),
     })
       .then(function (response) {
-        setStatus(response.status);
-        if (response.status === 200) {
+        setStatus(response.statusText);
+        if (response.status === 200 || response.status === 201) {
           reset();
           setSelectedOptions([]);
           router.push("/products");
@@ -231,7 +231,7 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
               {...register("startDate")}
               id="startDate"
               type="text"
-              placeholder="2023-10-09T17:10:36.357Z"
+              placeholder=""
               className="input input-bordered w-full max-w-xs"
             />
             {errors.startDate && <p>{errors.startDate.message}</p>}
@@ -311,7 +311,13 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
         <button type="submit" className="btn btn-primary mt-3">
           {productInfo ? "Update" : "Save"}
         </button>
-        {/* {status && <Toast status={status} />} */}
+        {status && (
+          <div className="toast toast-end">
+            <div className="alert alert-error">
+              <span>{status}</span>
+            </div>
+          </div>
+        )}
       </form>
     </>
   );

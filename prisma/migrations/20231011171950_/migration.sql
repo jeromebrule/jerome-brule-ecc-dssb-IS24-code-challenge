@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE `Product` ALTER COLUMN `startDate` DROP DEFAULT,
-    MODIFY `location` VARCHAR(191) NOT NULL DEFAULT '';
