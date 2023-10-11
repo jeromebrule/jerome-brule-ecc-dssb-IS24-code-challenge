@@ -231,7 +231,7 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
               {...register("startDate")}
               id="startDate"
               type="text"
-              placeholder=""
+              placeholder="2023-10-10"
               className="input input-bordered w-full max-w-xs"
             />
             {errors.startDate && <p>{errors.startDate.message}</p>}
