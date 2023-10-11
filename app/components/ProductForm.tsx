@@ -21,7 +21,7 @@ const schema = z.object({
   developers: z.array(Developer).optional(),
   scrumMasterName: z.string().min(3),
   startDate: z.date().optional(),
-  methodology: z.string().optional(),
+  methodology: z.string(),
   location: z.string().optional(),
 });
 
