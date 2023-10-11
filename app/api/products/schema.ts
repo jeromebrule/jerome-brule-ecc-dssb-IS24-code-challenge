@@ -22,7 +22,7 @@ const schema = z.object({
   productOwnerName: z.string().min(3),
   developers: z.array(developerSchema).optional(),
   scrumMasterName: z.string().min(3),
-  startDate: z.date().optional(),
+  startDate: z.date(),
   methodology: z.string().optional(),
   location: z.string().optional(),
 })

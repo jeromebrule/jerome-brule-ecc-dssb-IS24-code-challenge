@@ -192,7 +192,6 @@ export async function PUT(
 
   // if (!token)
   //   return NextResponse.json({error: "Not authentificated"}, {status: 401});
-  console.log(body);
 
   if (!validation.success)
     return NextResponse.json(validation.error.errors, {status: 400});

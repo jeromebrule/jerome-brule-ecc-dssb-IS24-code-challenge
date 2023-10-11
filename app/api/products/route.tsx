@@ -117,6 +117,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
+  body.startDate = new Date(body.startDate);
+
   const validation = schema.safeParse(body);
 
   if (!validation.success)
