@@ -1,7 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import schema from "../schema";
 import prisma from "@/prisma/client";
-import {getServerSession} from "next-auth/next";
 import {getToken} from "next-auth/jwt";
 
 /**
@@ -31,6 +30,10 @@ import {getToken} from "next-auth/jwt";
  *                     id:
  *                       type: integer
  *                       description: The user ID.
+ *                       example: 0
+ *                     projectNumber:
+ *                       type: string
+ *                       description: Project Number - Auto Generated
  *                       example: 0
  *                     productName:
  *                       type: string

@@ -71,13 +71,14 @@ enum Methodology {
 
 model Product {
   productId        Int         @id @default(autoincrement())
+  productNumber    String      @default(cuid())
   productName      String      @unique
   productOwnerName String
   developers       Employee[]
   scrumMasterName  String
-  startDate        DateTime    @default(now())
+  startDate        DateTime    @map("yyyy-mm-dd")
   methodology      Methodology
-  location         String
+  location         String      @default("")
 }
 
 model Employee {

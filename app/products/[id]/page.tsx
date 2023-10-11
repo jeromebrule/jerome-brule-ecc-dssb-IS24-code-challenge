@@ -6,6 +6,8 @@ import {notFound} from "next/navigation";
 import Product from "@/lib/types";
 import React from "react";
 import Link from "next/link";
+import {isLisa, isAlan} from "@/helpers/session";
+import {format} from "date-fns";
 
 interface Props {
   params: {
@@ -16,6 +18,42 @@ interface Props {
 const UserDetailPage = ({params: {id}}: Props) => {
   const {data: session, status} = useSession();
   const [product, setProduct] = useState<Product>([]);
+
+  let activeRows = {
+    productName: true,
+    productOwnerName: true,
+    developers: true,
+    scrumMasterName: true,
+    startDate: true,
+    methodology: true,
+    location: true,
+  };
+
+  if (session) {
+    if (isLisa(session)) {
+      activeRows = {
+        productName: true,
+        productOwnerName: true,
+        developers: true,
+        scrumMasterName: true,
+        startDate: true,
+        methodology: true,
+        location: false,
+      };
+    }
+
+    if (isAlan(session)) {
+      activeRows = {
+        productName: true,
+        productOwnerName: true,
+        developers: true,
+        scrumMasterName: true,
+        startDate: false,
+        methodology: true,
+        location: true,
+      };
+    }
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -40,16 +78,20 @@ const UserDetailPage = ({params: {id}}: Props) => {
             <li>
               <strong>Scrum Master:</strong> {product.scrumMasterName}
             </li>
-            <li>
-              <strong>Start Date: </strong>
-              {product.startDate}
-            </li>
+            {activeRows.startDate && (
+              <li>
+                <strong>Start Date: </strong>
+                {product.startDate}
+              </li>
+            )}
             <li>
               <strong>Methodology:</strong> {product.methodology}
             </li>
-            <li>
-              <strong>Location:</strong> {product.location}
-            </li>
+            {activeRows.location && (
+              <li>
+                <strong>Location:</strong> {product.location}
+              </li>
+            )}
           </ul>
           {product.developers && (
             <>

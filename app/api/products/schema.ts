@@ -24,7 +24,7 @@ const schema = z.object({
   scrumMasterName: z.string().min(3),
   startDate: z.string().optional(),
   methodology: z.string().optional(),
-  location: z.string().min(5),
+  location: z.string().optional(),
 })
 
 export default schema;

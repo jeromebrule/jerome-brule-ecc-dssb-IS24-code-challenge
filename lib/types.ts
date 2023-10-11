@@ -1,5 +1,6 @@
 export default interface Product {
   productId: number;
+  productNumber: string;
   productName: string;
   productOwnerName: string;
   developers: Developer[];

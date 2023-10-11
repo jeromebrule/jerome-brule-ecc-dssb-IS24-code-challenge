@@ -1,7 +1,8 @@
 import {notFound} from "next/navigation";
 import Product from "@/lib/types";
 import ProductForm from "@/app/components/ProductForm";
-
+// import {isLisa, isAlan} from "@/helpers/session";
+// import {useSession} from "next-auth/react";
 interface Props {
   params: {
     id: number;
@@ -9,15 +10,50 @@ interface Props {
 }
 
 const Edit = async ({params: {id}}: Props) => {
+  // const {data: session} = useSession();
   const res = await fetch(`http://localhost:3000/api/products/${id}`);
   const productInfo: Product = await res.json();
 
   if (!productInfo.productId) notFound();
 
+  let activeFields = {
+    productName: true,
+    productOwnerName: true,
+    developers: true,
+    scrumMasterName: true,
+    startDate: true,
+    methodology: true,
+    location: true,
+  };
+
+  // if (isLisa(session)) {
+  //   activeFields = {
+  //     productName: true,
+  //     productOwnerName: true,
+  //     developers: true,
+  //     scrumMasterName: true,
+  //     startDate: true,
+  //     methodology: true,
+  //     location: true,
+  //   };
+  // }
+
+  // if (isAlan(session)) {
+  //   activeFields = {
+  //     productName: true,
+  //     productOwnerName: true,
+  //     developers: true,
+  //     scrumMasterName: true,
+  //     startDate: false,
+  //     methodology: true,
+  //     location: true,
+  //   };
+  // }
+
   return (
     <>
       <h2 className="card-title">Edit {productInfo.productName} information</h2>
-      <ProductForm productInfo={productInfo} />
+      <ProductForm activeFields={activeFields} productInfo={productInfo} />
     </>
   );
 };

@@ -53,6 +53,10 @@ export async function GET(request: NextRequest) {
  *                   properties:
  *                     id:
  *                       type: integer
+ *                     projectNumber:
+ *                       type: string
+ *                       description: Project Number - Auto Generated
+ *                       example: 0
  *                     name:
  *                       type: string
  *               scrumMasterName:
