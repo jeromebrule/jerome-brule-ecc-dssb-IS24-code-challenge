@@ -54,6 +54,7 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [employees, setEmployees] = useState<any>([]);
   const [status, setStatus] = useState<any>();
+  const [productOwner, setProductOwner] = useState<any>();
 
   const {
     reset,
@@ -97,6 +98,7 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
       }));
 
       setSelectedOptions(loadDev);
+      setProductOwner(productInfo.productOwnerName);
     }
   }, [employees]);
 
@@ -180,9 +182,9 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
                   {...register("productOwnerName")}
                   className="select select-bordered"
                 >
-                  <option value="" disabled>
+                  <option value="">
                     {productInfo?.productOwnerName
-                      ? productInfo.productOwnerName
+                      ? productInfo?.productOwnerName
                       : "Select an option"}
                   </option>
                   {employees.map((owner: any) => (
@@ -235,13 +237,6 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
               <span className="label-text">Start Date</span>
               <span className="label-text-alt">*</span>
             </label>
-            {/* <input
-              {...register("startDate")}
-              id="startDate"
-              type="text"
-              placeholder="2023-10-10"
-              className="input input-bordered w-full max-w-xs"
-            /> */}
             <DatePicker
               {...register("startDate")}
               // {format(new Date(product.startDate), "MMMM dd, yyyy")}
@@ -267,7 +262,7 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
                   {...register("scrumMasterName")}
                   className="select select-bordered"
                 >
-                  <option value="" disabled>
+                  <option value="">
                     {productInfo?.scrumMasterName
                       ? productInfo.scrumMasterName
                       : "Select an option"}
