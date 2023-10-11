@@ -10,7 +10,6 @@ import {zodResolver} from "@hookform/resolvers/zod";
 
 const Developer = z.object({
   id: z.number().optional(),
-  name: z.string().optional(),
 });
 
 const schema = z.object({
@@ -49,7 +48,6 @@ interface Props {
 type FormData = z.infer<typeof schema>;
 
 const ProductForm = ({productInfo, activeFields}: Props) => {
-  const [startDate, setStartDate] = useState(new Date());
   const router = useRouter();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [employees, setEmployees] = useState<any>([]);
@@ -122,7 +120,7 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
     })
       .then(function (response) {
         setStatus(response.status);
-        if (response.status === 201) {
+        if (response.status === 200) {
           reset();
           setSelectedOptions([]);
           router.push("/products");
@@ -175,15 +173,15 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
                   className="select select-bordered"
                 >
                   <option value="" disabled>
-                    Select an option
+                    {productInfo?.productOwnerName
+                      ? productInfo.productOwnerName
+                      : "Select an option"}
                   </option>
-                  {employees
-                    .filter((employee: any) => employee.role === "PRODUCTOWNER")
-                    .map((owner: any) => (
-                      <option key={owner.id} value={owner.name}>
-                        {owner.name}
-                      </option>
-                    ))}
+                  {employees.map((owner: any) => (
+                    <option key={owner.id} value={owner.name}>
+                      {owner.name}
+                    </option>
+                  ))}
                 </select>
               )}
             />
@@ -254,15 +252,15 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
                   className="select select-bordered"
                 >
                   <option value="" disabled>
-                    Select an option
+                    {productInfo?.scrumMasterName
+                      ? productInfo.scrumMasterName
+                      : "Select an option"}
                   </option>
-                  {employees
-                    .filter((employee: any) => employee.role === "SCRUMMASTER")
-                    .map((owner: any) => (
-                      <option key={owner.id} value={owner.name}>
-                        {owner.name}
-                      </option>
-                    ))}
+                  {employees.map((owner: any) => (
+                    <option key={owner.id} value={owner.name}>
+                      {owner.name}
+                    </option>
+                  ))}
                 </select>
               )}
             />

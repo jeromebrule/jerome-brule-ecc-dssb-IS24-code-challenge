@@ -479,7 +479,7 @@ const Products = [
   },
   {
     "productName": "Product test 40",
-    "productOwnerName": "Daniel",
+    "productOwnerName": "Chloe",
     "scrumMasterName": "Benjamin",
     "startDate": "2023-10-09T17:10:36.357Z",
     "methodology": Methodology.AGILE,

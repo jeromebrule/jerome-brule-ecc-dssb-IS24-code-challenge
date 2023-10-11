@@ -73,7 +73,7 @@ const ProductsPage = () => {
         scrumMasterName: true,
         startDate: true,
         methodology: true,
-        location: true,
+        location: false,
         tools: true,
       };
     }
