@@ -5,8 +5,9 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import {format, parseISO} from "date-fns";
 
 const Developer = z.object({
   id: z.number().optional(),
@@ -19,7 +20,7 @@ const schema = z.object({
   productOwnerName: z.string().min(3),
   developers: z.array(Developer).optional(),
   scrumMasterName: z.string().min(3),
-  startDate: z.string().transform((str) => new Date(str)),
+  startDate: z.date().optional(),
   methodology: z.string().optional(),
   location: z.string().optional(),
 });
@@ -49,6 +50,7 @@ type FormData = z.infer<typeof schema>;
 
 const ProductForm = ({productInfo, activeFields}: Props) => {
   const router = useRouter();
+  const [startDate, setStartDate] = useState(new Date());
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [employees, setEmployees] = useState<any>([]);
   const [status, setStatus] = useState<any>();
@@ -61,7 +63,6 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
     handleSubmit,
     formState: {errors},
   } = useForm<FormData>({
-    resolver: zodResolver(schema),
     defaultValues: productInfo,
   });
 
@@ -113,23 +114,30 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
       ? `/api/products/${productInfo?.productId}`
       : "/api/products/";
     const method = productInfo ? "PUT" : "POST";
+    data.startDate = startDate;
 
-    fetch(url, {
-      method,
-      body: JSON.stringify(data),
-    })
-      .then(function (response) {
-        setStatus(response.statusText);
-        if (response.status === 200 || response.status === 201) {
-          reset();
-          setSelectedOptions([]);
-          router.push("/products");
-        }
-        return response.json();
+    try {
+      schema.parse(data);
+      console.log(data);
+      fetch(url, {
+        method,
+        body: JSON.stringify(data),
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then(function (response) {
+          setStatus(response.statusText);
+          if (response.status === 200 || response.status === 201) {
+            reset();
+            setSelectedOptions([]);
+            router.push("/products");
+          }
+          return response.json();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSelectChange = (selectedOptions: any) => {
@@ -227,11 +235,19 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
               <span className="label-text">Start Date</span>
               <span className="label-text-alt">*</span>
             </label>
-            <input
+            {/* <input
               {...register("startDate")}
               id="startDate"
               type="text"
               placeholder="2023-10-10"
+              className="input input-bordered w-full max-w-xs"
+            /> */}
+            <DatePicker
+              {...register("startDate")}
+              // {format(new Date(product.startDate), "MMMM dd, yyyy")}
+              selected={startDate}
+              onChange={(startDate: any) => setStartDate(startDate)}
+              dateFormat="MMMM d, yyyy"
               className="input input-bordered w-full max-w-xs"
             />
             {errors.startDate && <p>{errors.startDate.message}</p>}
