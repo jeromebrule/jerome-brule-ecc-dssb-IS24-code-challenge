@@ -5,11 +5,11 @@ interface Props {
 }
 
 const statusMessage = ({status}: Props) => {
-  if (status === 200) "Contact Updated.";
-  if (status === 201) "Contact Created.";
-  if (status === 400) "Contact already exist.";
-  if (status === 400) "Contact already exist.";
-  if (status === 500) "Contact already exist.";
+  if (status === 200) "Product Updated.";
+  if (status === 201) "Product Created.";
+  if (status === 400) "Product already exist.";
+  if (status === 400) "Product already exist.";
+  if (status === 500) "Product already exist.";
 };
 
 const Toast = ({status}: Props) => {
