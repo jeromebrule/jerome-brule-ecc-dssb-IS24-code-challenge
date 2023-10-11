@@ -58,7 +58,8 @@ http://localhost:3000/api/register
 <sup>There's a weird error in the package.</sup>
 
 ```
-http://localhost:3000/api-doc
+
+[http://localhost:3000/api-doc](http://localhost:3000/api-doc)
 
 ```
 
