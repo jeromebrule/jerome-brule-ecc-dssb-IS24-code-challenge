@@ -114,7 +114,7 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
       : "/api/products/";
     const method = productInfo ? "PUT" : "POST";
 
-    data.startDate = productInfo ? new Date() : startDate;
+    data.startDate = productInfo ? new Date(startDate) : startDate;
 
     try {
       schema.parse(data);
