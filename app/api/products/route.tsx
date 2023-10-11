@@ -132,7 +132,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({error: "product already exist"}, {status: 400});
 
   const dev = body.developers ? body.developers : [];
-  console.log(dev);
 
   function findDuplicates(arr: any) {
     const seen = new Set();
