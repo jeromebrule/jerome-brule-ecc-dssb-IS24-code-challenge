@@ -75,40 +75,6 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
     },
   ];
 
-  // let activeFields = {
-  //   productName: true,
-  //   productOwnerName: true,
-  //   developers: true,
-  //   scrumMasterName: true,
-  //   startDate: true,
-  //   methodology: true,
-  //   location: true,
-  // };
-
-  // if (isLisa(session)) {
-  //   activeFields = {
-  //     productName: true,
-  //     productOwnerName: true,
-  //     developers: true,
-  //     scrumMasterName: true,
-  //     startDate: true,
-  //     methodology: true,
-  //     location: false,
-  //   };
-  // }
-
-  // if (isAlan(session)) {
-  //   activeFields = {
-  //     productName: true,
-  //     productOwnerName: true,
-  //     developers: true,
-  //     scrumMasterName: true,
-  //     startDate: false,
-  //     methodology: true,
-  //     location: true,
-  //   };
-  // }
-
   useEffect(() => {
     const defaultDev = employees
       .filter((employee: Developer) => employee.role === "DEV")
@@ -147,7 +113,8 @@ const ProductForm = ({productInfo, activeFields}: Props) => {
       ? `/api/products/${productInfo?.productId}`
       : "/api/products/";
     const method = productInfo ? "PUT" : "POST";
-    data.startDate = startDate;
+
+    data.startDate = productInfo ? new Date() : startDate;
 
     try {
       schema.parse(data);
